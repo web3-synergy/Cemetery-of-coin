@@ -2,42 +2,69 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import Image from 'next/image';
-import { RiDashboardFill } from "react-icons/ri";
+
+
+import { IX } from '../icons/iX';
 
 import { Dust } from '../icons/Dust';
-import { SolarSledgehammerBold } from '../icons/SolarSledgehammerBold';
-import { Vol } from '../icons/Vol';
-import { HeroiconsMagnifyingGlass16Solid } from '../icons/HeroiconsMagnifyingGlass16Solid';
-import { MdiCog } from '../icons/MdiCog';
-import { Team } from '../icons/Team';
-import  {Boost} from '../icons/Boost';
-import {Tomb} from '../icons/Tomb';
-import {Git} from '../icons/git';
-import { Burn} from '../icons/Burn';
+
+
+import { Pop } from '../icons/pop';
+import  {Stream} from '../icons/Stream';
+import {Vol} from '../icons/Vol';
+import {Whitepaper} from '../icons/Whitepaper';
+import { Vector} from '../icons/Vector';
 import styles from './Feature.module.css';
 const featureTabs = [
     {
         id: 1,
-        title: "Whitepaper",
+        title: " Whitepaper",
         label: "Feature One",
-        desc: "Cemetery of Coins is a memecoin and platform that acknowledges the brutal reality of the crypto market—most coins fail. Instead of ignoring this, the project embraces it, offering a symbolic and practical cemetery where users can burn their worthless tokens, gain insights, and access tools to succeed in future trades or launches. The token powers a platform that provides utilities for traders, project creators, and community members, fostering resilience and opportunity in a volatile market.",
-        icon: <Git className={styles.icon} />,
+        desc: "Cemetery is a revolutionary DeFi utility project built on Binance Smart Chain (BSC), inspired by Solana's Sol Incinerator but tailored for BSC's vibrant ecosystem. We empower users to reclaim value from worthless dust meme coins",
+        icon: <Whitepaper  />,
         img: "/assets/img/landingPage/paper.PNG",
     },
     {
         id: 2,
-        title: "Dust to Rewards",
+        title: "Dust Incinerator",
         label: "Feature Two",
-        desc: "Allow users to burn their dust (worthless or low-value tokens) in the Cemetery of Coins platform to receive benefits, such as tokens, platform fees, solanas or other rewards.",
-        icon: <Burn className={styles.icon} />,
+        desc: "Scan and burn micro-balance meme coins from your BSC wallet, permanently removing spam tokens and reducing on-chain clutter for a sleeker portfolio.",
+        icon: <Vector  />,
         img: "/assets/img/landingPage/paper.PNG",
     },
     {
         id: 3,
-        title: "Dust and Dreams",
+        title: "Slot Machine Casino",
         label: "Feature Three",
-        desc: "Turn the act of burning dust tokens into a fun, rewarding experience with a slot machine or lottery system, where users can win spin tickets earned from burning.",
-        icon: <Dust className={styles.icon} />,
+        desc: "Wager your dust holdings on provably fair, RNG-powered slots themed around meme coin chaos; winners claim $BINANSTER rewards or BNB prizes.",
+        icon: <Dust  />,
+        img: "/assets/img/landingPage/paper.PNG",
+    },
+    {
+        id: 4,
+        title: "Pair Discovery Scanner",
+        label: "Feature Four",
+        desc: "Use $BINANSTER to unlock an AI-driven tool that scans BSC DEXes (like PancakeSwap) for emerging liquidity pairs, spotting high-potential meme coin launches before they moon.",
+
+        icon: <IX  />,
+        img: "/assets/img/landingPage/paper.PNG",
+    },
+    {
+        id: 5,
+        title: "Aster Perp Integration",
+        label: "Feature Four",
+        desc: "Stake $BINANSTER for boosted yields on Aster's perpetual DEX, enabling leveraged trading of meme assets with reduced fees and enhanced oracle accuracy.",
+
+        icon: <Stream  />,
+        img: "/assets/img/landingPage/paper.PNG",
+    },
+    {
+        id: 6,
+        title: "Referral Burn Rewards",
+        label: "Feature Four",
+        desc: "Invite friends to incinerate dust and earn $BINANSTER airdrops; a portion auto-burns to community-driven supply reduction.",
+
+        icon: <Pop />,
         img: "/assets/img/landingPage/paper.PNG",
     },
     {
@@ -47,32 +74,6 @@ const featureTabs = [
         desc: "Provide a premium tool for memecoin project creators to boost their token launches, accessible only to token platform olders who meet a minimum token threshold and time holding.",
 
         icon: <Vol className={styles.icon} />,
-        img: "/assets/img/landingPage/paper.PNG",
-    },
-    {
-        id: 5,
-        title: "Boost Token",
-        label: "Feature Four",
-        desc: "A platform feature where users can access real-time market insights or promote their favorite tokens, powered by cemetery of coins platform.",
-
-        icon: <Boost className={styles.icon} />,
-        img: "/assets/img/landingPage/paper.PNG",
-    },
-    {
-        id: 6,
-        title: "Bag Workers Team",
-        label: "Feature Four",
-        desc: "A decentralized marketplace where users can hire crypto experts (e.g., developers, marketers, community managers) to support their projects, paid in platform tokens.",
-
-        icon: <Team className={styles.icon} />,
-        img: "/assets/img/landingPage/paper.PNG",
-    },
-    {
-        id: 7,
-        title: "Tombstone NFTs ",
-        label: "Feature Four",
-        desc: "Unique NFTs minted when users burn tokens, serving as collectibles or proof of participation. These could have utility, such as unlocking premium features or staking rewards.",
-        icon: <Tomb className={styles.icon} />,
         img: "/assets/img/landingPage/paper.PNG",
     },
 ];

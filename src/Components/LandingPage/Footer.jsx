@@ -21,7 +21,7 @@ const aboutus  = [
 
 
 const chart = [
-    { label: 'Pump fun', link: '/' },
+    { label: 'Four meme', link: '/' },
     { label: 'Dexscreener', link: '/' },
     
 ];
