@@ -7,7 +7,7 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 export default function PrivyWrapper({ children }) {
   return (
     <PrivyProvider
-      appId={"cmgdbex2800uil70cw8diq9kx"}
+      appId="cmgdbex2800uil70cw8diq9kx"
       config={{
         loginMethods: ["wallet"],
         appearance: {
@@ -15,17 +15,19 @@ export default function PrivyWrapper({ children }) {
           accentColor: "#6C63FF",
           showWalletLoginFirst: true,
         },
+        externalWallets: {
+          disableAllExternalWallets: false, // Enable external wallets
+        },
         walletConnect: {
           projectId: "7c4ac28d76f21a2b7ad46e6e82091fcf",
         },
         walletConnectors: {
           evm: {
-            chains: [56],
+            chains: [1, 56, 137], // Support multiple chains
             defaultChain: 56,
           },
           solana: null,
         },
-        // ✅ Automatically use embedded wallet on mobile
         embeddedWallets: {
           createOnLogin: isMobile ? "all-users" : "none",
         },
