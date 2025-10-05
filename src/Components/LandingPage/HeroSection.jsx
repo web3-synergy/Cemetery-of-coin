@@ -33,9 +33,9 @@ export default function HeroSection() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Countdown timer
+  
   const calculateTimeLeft = () => {
-    const targetDate = new Date("2025-09-30");
+    const targetDate = new Date("2025-10-06");
     const difference = targetDate - new Date();
     let timeLeft = {};
     if (difference > 0) {
@@ -57,7 +57,7 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-  // Contract Address Copy Logic
+  
   const [copied, setCopied] = useState(false);
   const contractAddress = "Coming soon";
 
@@ -68,7 +68,7 @@ export default function HeroSection() {
     });
   };
 
-  // Enable sound
+  
   const enableSound = () => {
     if (videoRef.current && !soundEnabled) {
       videoRef.current.muted = false;
@@ -83,7 +83,7 @@ export default function HeroSection() {
     }
   };
 
-  // Attach listeners for first user interaction
+  
   useEffect(() => {
     const handleUserInteraction = () => {
       enableSound();
@@ -260,4 +260,5 @@ export default function HeroSection() {
       </div>
     </div>
   );
+
 }
