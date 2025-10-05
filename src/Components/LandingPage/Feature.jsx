@@ -36,7 +36,7 @@ const featureTabs = [
         id: 3,
         title: "Slot Machine Casino",
         label: "Feature Three",
-        desc: "Wager your dust holdings on provably fair, RNG-powered slots themed around meme coin chaos; winners claim $BINANSTER rewards or BNB prizes.",
+        desc: "Wager your dust holdings on provably fair, RNG-powered slots themed around meme coin chaos; winners claim token rewards or BNB prizes.",
         icon: <Dust  />,
         img: "/assets/img/landingPage/paper.PNG",
     },
@@ -44,7 +44,7 @@ const featureTabs = [
         id: 4,
         title: "Pair Discovery Scanner",
         label: "Feature Four",
-        desc: "Use $BINANSTER to unlock an AI-driven tool that scans BSC DEXes (like PancakeSwap) for emerging liquidity pairs, spotting high-potential meme coin launches before they moon.",
+        desc: "Use the token  to unlock an AI-driven tool that scans BSC DEXes (like PancakeSwap) for emerging liquidity pairs, spotting high-potential meme coin launches before they moon.",
 
         icon: <IX  />,
         img: "/assets/img/landingPage/paper.PNG",
@@ -53,7 +53,7 @@ const featureTabs = [
         id: 5,
         title: "Aster Perp Integration",
         label: "Feature Five",
-        desc: "Stake $BINANSTER for boosted yields on Aster's perpetual DEX, enabling leveraged trading of meme assets with reduced fees and enhanced oracle accuracy.",
+        desc: "Stake token for boosted yields on Aster's perpetual DEX, enabling leveraged trading of meme assets with reduced fees and enhanced oracle accuracy.",
 
         icon: <Stream  />,
         img: "/assets/img/landingPage/paper.PNG",
@@ -62,7 +62,7 @@ const featureTabs = [
         id: 6,
         title: "Referral Burn Rewards",
         label: "Feature Six",
-        desc: "Invite friends to incinerate dust and earn $BINANSTER airdrops; a portion auto-burns to community-driven supply reduction.",
+        desc: "Invite friends to incinerate dust and earn  airdrops; a portion auto-burns to community-driven supply reduction.",
 
         icon: <Pop />,
         img: "/assets/img/landingPage/paper.PNG",
