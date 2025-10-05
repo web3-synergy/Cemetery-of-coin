@@ -33,7 +33,7 @@ export default function PrivyWrapper({ children }) {
 
         // Embedded wallet is optional on mobile
         embeddedWallets: {
-          createOnLogin: false, // don't force embedded wallet
+          createOnLogin: true, // don't force embedded wallet
         },
 
         // Allow external wallets on all devices, including mobile
