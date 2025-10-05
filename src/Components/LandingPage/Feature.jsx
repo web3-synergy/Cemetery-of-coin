@@ -73,7 +73,7 @@ const featureTabs = [
         label: "Feature Four",
         desc: "Provide a premium tool for memecoin project creators to boost their token launches, accessible only to token platform olders who meet a minimum token threshold and time holding.",
 
-        icon: <Vol className={styles.icon} />,
+        icon: <Vol  />,
         img: "/assets/img/landingPage/paper.PNG",
     },
 ];
@@ -198,5 +198,6 @@ export default function Feature() {
         </motion.div>
     );
 }
+
 
 
