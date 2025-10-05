@@ -29,7 +29,7 @@
     font-family: "MyFont", sans-serif;
     position: absolute;
     top: 70px;
-    left: 90px;
+    left: 70px;
     font-size: 20px;
     color: white;
 }
@@ -49,6 +49,7 @@
     font-size: 24px;
     font-family: var(--font-redhat);
     font-weight: 700;
+    gap: 10px;
     margin: 0;                 /* remove fixed margins for better spacing control */
 }
 
@@ -163,7 +164,8 @@
     }
 
     .chain {
-        font-size: 24px;        
+        font-size: 24px; 
+               
           
     }
 }      

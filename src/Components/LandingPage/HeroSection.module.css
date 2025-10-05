@@ -16,6 +16,10 @@
   
   
 }
+.menuicon {
+  margin-right: 5px; 
+  margin-bottom: 5px;
+}
 .extraLabel {
   font-size: 13px;
   color: #00ff00;
@@ -219,7 +223,7 @@
   text-decoration: none;
   font-weight: 600;
   transition: all 0.2s ease;
-  
+  font-size: 15px;
   
   
   
@@ -426,8 +430,8 @@
   }
 
   .minbutton {
-    font-size: 13px;
-    padding: 8px 16px;
+    font-size: 15px;
+    padding: 10px 6px;
   }
   .name {
     font-size: 13px;

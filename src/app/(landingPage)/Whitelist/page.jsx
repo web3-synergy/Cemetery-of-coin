@@ -28,23 +28,33 @@ export default function WhitelistPage() {
   // ----------------- Wallet Disconnect -----------------
   const handleDisconnect = async () => {
     try {
-      // Only disconnect if there are wallets
-      if (wallets.length > 0) {
-        await Promise.all(wallets.map(wallet => disconnect(wallet)));
+      console.log("Attempting to disconnect wallets:", wallets);
+  
+      // Explicitly disconnect all connected wallets
+      if (wallets && wallets.length > 0) {
+        for (const wallet of wallets) {
+          try {
+            await disconnect(wallet);
+            console.log(`Disconnected wallet: ${wallet.address}`);
+          } catch (err) {
+            console.warn(`Error disconnecting wallet ${wallet.address}:`, err);
+          }
+        }
       }
   
-      // Then log out from Privy
+      // Then log out Privy session
       await logout();
+      console.log("Privy logout successful");
   
-      // Reset local state
+      // Reset state
       setWhitelistSuccess(false);
       setSpookyUsername("");
       setUsernameError("");
   
-      // Redirect to homepage
-      router.push("/");
+      // Optional: Redirect user
+      
     } catch (err) {
-      console.error("Error disconnecting:", err);
+      console.error("Error disconnecting wallets:", err);
     }
   };
   // ----------------- Username Validation -----------------
@@ -130,7 +140,7 @@ export default function WhitelistPage() {
           className={styles.buttonPurple}
           onClick={() => login({ method: "wallet" })}
         >
-          <Image src="/Wallet.svg" alt="Wallet" width={20} height={20} priority/>
+          <Image src="/Wallet.svg" alt="Wallet" width={15} height={20} priority/>
           Connect Wallet
         </button>
         ) : whitelistSuccess ? (

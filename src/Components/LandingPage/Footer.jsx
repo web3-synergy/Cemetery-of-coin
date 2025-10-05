@@ -98,11 +98,10 @@ export default function Footer() {
                     </motion.div>
                 </div>
                 <div className={styles.bnb}>
-  <h2 className={styles.chain}>
-    <Bnb width={50} height={50}    />
-    BNB CHAIN
-    
-  </h2>
+                <h2 className={styles.chain}>
+  <Bnb width={50} height={50} />
+  <span>BNB CHAIN</span>
+</h2>
   <Four />
 </div>
 
