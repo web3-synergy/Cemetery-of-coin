@@ -96,7 +96,7 @@
       padding: 0.5rem; /* shrink button on small screens */
     }
   
-    .buttonPurple .phantomLogo {
+    .buttonPurple .WalletLogo {
       width: 24px;
       height: 24px;
       margin-right: 6px;
@@ -169,7 +169,7 @@
     border-radius: 8px;
   }
   
-  .buttonPurple .phantomLogo {
+  .buttonPurple .WalletLogo {
     width: 30px;
     height: 30px;
     margin-right: 8px;
@@ -226,7 +226,7 @@
     color: #00FF40;
   }
   
-  .phantomLogo {
+  .WalletLogo {
     transform: translateY(5px);
   }
   

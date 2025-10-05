@@ -28,17 +28,25 @@ export default function WhitelistPage() {
   // ----------------- Wallet Disconnect -----------------
   const handleDisconnect = async () => {
     try {
-      await Promise.all(wallets.map(async (wallet) => await disconnect(wallet)));
+      // Only disconnect if there are wallets
+      if (wallets.length > 0) {
+        await Promise.all(wallets.map(wallet => disconnect(wallet)));
+      }
+  
+      // Then log out from Privy
       await logout();
+  
+      // Reset local state
       setWhitelistSuccess(false);
       setSpookyUsername("");
       setUsernameError("");
+  
+      // Redirect to homepage
       router.push("/");
     } catch (err) {
       console.error("Error disconnecting:", err);
     }
   };
-
   // ----------------- Username Validation -----------------
   const validateUsername = (username) => {
     const trimmed = username.trim();
@@ -118,20 +126,23 @@ export default function WhitelistPage() {
         <p className={styles.list}>Whitelist</p>
 
         {!authenticated ? (
-          <button className={styles.buttonPurple} onClick={login}>
-            <Image src="/Wallet.svg" alt="Wallet" width={30} height={30} priority />
-            Connect Wallet
-          </button>
+          <button
+          className={styles.buttonPurple}
+          onClick={() => login({ method: "wallet" })}
+        >
+          <Image src="/Wallet.svg" alt="Wallet" width={20} height={20} priority/>
+          Connect Wallet
+        </button>
         ) : whitelistSuccess ? (
           <div className={styles.successScreen}>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
                 <Image
-                  src="/phantom.svg"
+                  src="/Wallet.svg"
                   alt="Wallet"
-                  width={30}
-                  height={30}
-                  className={styles.walletLogo}
+                  width={20}
+                  height={20}
+                  className={styles.WalletLogo}
                 />
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress)}
@@ -160,7 +171,7 @@ export default function WhitelistPage() {
           <div>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image src="/Wallet.svg" alt="Wallet" width={30} height={30} priority />
+                <Image src="/Wallet.svg" alt="Wallet" width={20} height={20} priority />
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress) || "No wallet connected"}
                 </span>

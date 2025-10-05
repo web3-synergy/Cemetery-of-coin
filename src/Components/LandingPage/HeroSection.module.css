@@ -199,19 +199,15 @@
   padding: 10px 5px;
   font-size: 15px;
   font-weight: 600;
-  border: 1px solid #39F945;
+  border: 1px solid ;
   border-radius: 6px;
-  background: transparent;
-  color: white;
+  background-color: #39F945;
+  color: black;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.minbutton:hover {
-  background: #39F945;
-  color: black;
-  
-}
+
 /* Desktop Menu */
 .desktopMenu {
   display: flex;

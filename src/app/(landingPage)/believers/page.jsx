@@ -12,14 +12,13 @@ const BelieversTable = () => {
   useEffect(() => {
     const fetchBelievers = async () => {
       try {
-        // Fetch from whitelist_users instead of believers
         const querySnapshot = await getDocs(collection(db, "whitelist_users"));
         const data = querySnapshot.docs.map((doc, index) => ({
           id: doc.id,
           index: index + 1,
           ...doc.data(),
         }));
-        console.log("Fetched believers:", data); // optional debug
+        console.log("Fetched believers:", data);
         setBelievers(data);
       } catch (err) {
         console.error("Error fetching believers:", err);
@@ -30,6 +29,10 @@ const BelieversTable = () => {
 
     fetchBelievers();
   }, []);
+
+  // Helper to truncate wallet address
+  const formatWalletAddress = (addr) =>
+    addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : "N/A";
 
   return (
     <div className={styles.tableContainer}>
@@ -52,7 +55,7 @@ const BelieversTable = () => {
                 <tr key={b.id}>
                   <td>{b.index}</td>
                   <td>{b.spookyUsername || "USERNAME"}</td>
-                  <td>{b.walletAddress || "N/A"}</td>
+                  <td>{formatWalletAddress(b.walletAddress)}</td>
                 </tr>
               ))}
             </tbody>

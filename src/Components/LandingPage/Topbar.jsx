@@ -68,7 +68,7 @@ export default function Topbar() {
             {/* Links row */}
             <div className={styles.mobilelink}>
               <Link href="/" className={styles.menuitem} onClick={() => setMenuOpen(false)}>
-              <Home />Home
+              <Home className={styles.menuicon}/>Home
               </Link>
               <Link
                 href="/believers"

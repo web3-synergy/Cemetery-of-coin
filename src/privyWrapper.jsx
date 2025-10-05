@@ -2,6 +2,11 @@
 
 import { PrivyProvider } from "@privy-io/react-auth";
 
+// Detect mobile devices
+const isMobile = /iPhone|iPad|iPod|Android/i.test(
+  typeof navigator !== "undefined" ? navigator.userAgent : ""
+);
+
 export default function PrivyWrapper({ children }) {
   return (
     <PrivyProvider
@@ -11,16 +16,13 @@ export default function PrivyWrapper({ children }) {
         appearance: {
           theme: "dark",
           accentColor: "#6C63FF",
-          showWalletLoginFirst: true,
+          showWalletLoginFirst: false, // ❌ prevents embedded wallet from blocking mobile external wallets
         },
         walletConnect: {
           projectId: "7c4ac28d76f21a2b7ad46e6e82091fcf",
         },
-
-        // ✅ Correct structure for wallet connectors
         walletConnectors: {
           evm: {
-            // Supported EVM chains (use chain objects, not just numbers)
             chains: [
               {
                 id: 56,
@@ -31,20 +33,21 @@ export default function PrivyWrapper({ children }) {
             ],
             defaultChain: 56,
           },
-          solana: false, // explicitly disable Solana if not needed
+          solana: isMobile ? null : { network: "mainnet-beta" }, // optional: disable on mobile if needed
         },
-
-        // ✅ Embedded wallets are supported (optional)
         embeddedWallets: {
-          createOnLogin: false, // set to true only if you want auto-wallet creation
+          createOnLogin: false, // ⚠ optional, prevents auto-creation on mobile
         },
-
-        // ✅ Allow external wallets (MetaMask, Phantom, etc.)
-        externalWallets: {
-          coinbaseWallet: {},
-          phantom: {},
-          walletConnect: {},
-        },
+        externalWallets: isMobile
+          ? {
+              phantom: {}, // mobile-supported wallets only
+              walletConnect: {},
+            }
+          : {
+              coinbaseWallet: {},
+              phantom: {},
+              walletConnect: {},
+            },
       }}
     >
       {children}
