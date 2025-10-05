@@ -118,7 +118,10 @@ export default function WhitelistPage() {
         <p className={styles.list}>Whitelist</p>
 
         {!authenticated ? (
-          <button className={styles.buttonPurple} onClick={login}>
+          <button className={styles.buttonPurple} onClick={() => login({ 
+          method: "wallet"
+            
+          })}>
             <Image src="/phantom.svg" alt="Wallet" width={30} height={30} priority />
             Connect Wallet
           </button>
