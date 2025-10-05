@@ -16,14 +16,14 @@ export default function PrivyWrapper({ children }) {
           showWalletLoginFirst: true,
         },
         externalWallets: {
-          disableAllExternalWallets: false, // Enable external wallets
+          disableAllExternalWallets: false, 
         },
         walletConnect: {
           projectId: "7c4ac28d76f21a2b7ad46e6e82091fcf",
         },
         walletConnectors: {
           evm: {
-            chains: [1, 56, 137], // Support multiple chains
+            chains: [1, 56, 137], 
             defaultChain: 56,
           },
           solana: null,
