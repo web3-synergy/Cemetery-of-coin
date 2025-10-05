@@ -10,7 +10,7 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(
 export default function PrivyWrapper({ children }) {
   return (
     <PrivyProvider
-      appId={"cmgdbex2800uil70cw8diq9kx"} // ✅ your Privy App ID
+      appId={"cmgdbex2800uil70cw8diq9kx"} 
       config={{
         loginMethods: ["wallet"],
         appearance: {
@@ -28,17 +28,17 @@ export default function PrivyWrapper({ children }) {
             chains: [56],
             defaultChain: 56,
           },
-          solana: null, // disable Solana
+          solana: null, // disable Solana if not needed
         },
 
-        // ✅ Automatically create embedded wallet on mobile
+        // Embedded wallet is optional on mobile
         embeddedWallets: {
-          createOnLogin: isMobile ? "all-users" : "none",
+          createOnLogin: false, // don't force embedded wallet
         },
 
-        // ✅ Enable/disable external wallets dynamically
+        // Allow external wallets on all devices, including mobile
         externalWallets: {
-          disableAllExternalWallets: isMobile, // true for mobile, false for desktop
+          disableAllExternalWallets: false, // ✅ external wallets allowed
         },
       }}
     >
