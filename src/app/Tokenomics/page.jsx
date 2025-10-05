@@ -20,10 +20,10 @@ const TokenomicsChart = () => {
         label: "Token Allocation",
         data: [20, 15, 30, 20, 15],
         backgroundColor: [
-          "rgba(57, 249, 69, 0.8)",   // bright green
-          "rgba(57, 200, 57, 0.6)",   // medium green
-          "rgba(34, 139, 34, 0.4)",   // darker green
-          "rgba(144, 238, 144, 0.5)", // light green
+          "rgba(57, 249, 69, 0.8)",   
+          "rgba(57, 200, 57, 0.6)",   
+          "rgba(34, 139, 34, 0.4)",   
+          "rgba(144, 238, 144, 0.5)", 
           "rgba(0, 128, 0, 0.7)",
         ],
         borderWidth: 1,
