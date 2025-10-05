@@ -52,7 +52,7 @@ const featureTabs = [
     {
         id: 5,
         title: "Aster Perp Integration",
-        label: "Feature Four",
+        label: "Feature Five",
         desc: "Stake $BINANSTER for boosted yields on Aster's perpetual DEX, enabling leveraged trading of meme assets with reduced fees and enhanced oracle accuracy.",
 
         icon: <Stream  />,
@@ -61,19 +61,19 @@ const featureTabs = [
     {
         id: 6,
         title: "Referral Burn Rewards",
-        label: "Feature Four",
+        label: "Feature Six",
         desc: "Invite friends to incinerate dust and earn $BINANSTER airdrops; a portion auto-burns to community-driven supply reduction.",
 
         icon: <Pop />,
         img: "/assets/img/landingPage/paper.PNG",
     },
     {
-        id: 4,
+        id: 7,
         title: "Volume Bot",
-        label: "Feature Four",
+        label: "Feature Seven",
         desc: "Provide a premium tool for memecoin project creators to boost their token launches, accessible only to token platform olders who meet a minimum token threshold and time holding.",
 
-        icon: <Vol  />,
+        icon: <Vol />,
         img: "/assets/img/landingPage/paper.PNG",
     },
 ];

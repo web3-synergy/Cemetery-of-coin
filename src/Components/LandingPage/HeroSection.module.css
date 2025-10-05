@@ -254,12 +254,13 @@
 .mobilelink {
   display: flex;
   flex-direction: column;   /* 👈 put links side by side */
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5rem;           /* 👈 spacing between links */
        /* optional spacing from top row */
 }
 .mobileTopRow {
   gap: 20px;
+  
 
 }
 

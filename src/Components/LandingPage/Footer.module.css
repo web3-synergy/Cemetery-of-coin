@@ -29,7 +29,7 @@
     font-family: "MyFont", sans-serif;
     position: absolute;
     top: 70px;
-    left: 150px;
+    left: 100px;
     font-size: 20px;
     color: white;
 }
@@ -62,6 +62,7 @@
 }
 .footerLinks{
     row-gap: 15px;
+    padding-top: 30px;
 }
 .footerLinks h1{
     color: #FFFFFF;

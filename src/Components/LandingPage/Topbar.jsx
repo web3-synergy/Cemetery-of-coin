@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./HeroSection.module.css";
 import { Believers } from "../icons/Believers";
 import { Tokenomics } from "../icons/Tokenomics";
+import { Home } from "../icons/home";
 
 export default function Topbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -66,7 +67,9 @@ export default function Topbar() {
 
             {/* Links row */}
             <div className={styles.mobilelink}>
-              <Link href="/" className={styles.menuitem}>Home</Link>
+              <Link href="/" className={styles.menuitem} onClick={() => setMenuOpen(false)}>
+              <Home />Home
+              </Link>
               <Link
                 href="/believers"
                 className={styles.menuItem}
