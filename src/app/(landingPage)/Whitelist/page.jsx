@@ -132,7 +132,7 @@ export default function WhitelistPage() {
           <div className={styles.successScreen}>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image src={walletLogo} alt="Wallet" className={styles.walletLogo} />
+                <Image src="phantom.svg" alt="Wallet" width={30} height={30} priority/>
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress)}
                 </span>
