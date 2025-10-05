@@ -66,6 +66,7 @@ export default function Topbar() {
 
             {/* Links row */}
             <div className={styles.mobilelink}>
+              <Link href="/" className={styles.menuitem}>Home</Link>
               <Link
                 href="/believers"
                 className={styles.menuItem}
@@ -81,7 +82,7 @@ export default function Topbar() {
               >
                 <Tokenomics className={styles.menuicon} /> Tokenomics
               </Link>
-              <Link href="/" className={styles.menuitem}>Home</Link>
+              
             </div>
           </div>
         </>
