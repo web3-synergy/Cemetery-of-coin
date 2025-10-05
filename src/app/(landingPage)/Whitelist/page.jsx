@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
-import { db, addDoc, collection } from "@/firebase";
-import { query, where, getDocs, serverTimestamp } from "firebase/firestore";
+import { db } from "@/firebase";
+import { addDoc, collection, query, where, getDocs, serverTimestamp } from "firebase/firestore";
 import Image from "next/image";
 import styles from "./Whitelist.module.css";
 
@@ -18,28 +18,28 @@ export default function WhitelistPage() {
   const [whitelistSuccess, setWhitelistSuccess] = useState(false);
   const [usernameError, setUsernameError] = useState("");
 
-  const walletAddress = wallets[0]?.address || null;
+  // ✅ Supports both EVM and Solana addresses
+  const walletAddress = ready && wallets.length > 0 ? wallets[0].address : null;
+  const walletType = wallets[0]?.chainType || "unknown"; // 'evm' or 'solana'
 
   const formatWalletAddress = (addr) =>
     addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : "";
 
-  // ----------------- Wallet Functions -----------------
+  // ----------------- Wallet Disconnect -----------------
   const handleDisconnect = async () => {
     try {
+      await Promise.all(wallets.map(async (wallet) => await disconnect(wallet)));
       await logout();
-      if (wallets.length > 0) await disconnect(wallets[0]);
-
       setWhitelistSuccess(false);
       setSpookyUsername("");
       setUsernameError("");
-
       router.push("/");
     } catch (err) {
       console.error("Error disconnecting:", err);
     }
   };
 
-  // ----------------- Form Validation -----------------
+  // ----------------- Username Validation -----------------
   const validateUsername = (username) => {
     const trimmed = username.trim();
     if (!trimmed) return "Please enter a username";
@@ -50,7 +50,7 @@ export default function WhitelistPage() {
     return "";
   };
 
-  // ----------------- Submit to Firestore -----------------
+  // ----------------- Firestore Submission -----------------
   const submitToWhitelist = async () => {
     const validationError = validateUsername(spookyUsername);
     if (validationError) {
@@ -90,6 +90,7 @@ export default function WhitelistPage() {
 
       await addDoc(collection(db, "whitelist_users"), {
         walletAddress,
+        chainType: walletType,
         spookyUsername: spookyUsername.trim(),
         timestamp: serverTimestamp(),
       });
@@ -106,7 +107,6 @@ export default function WhitelistPage() {
 
   const isButtonDisabled = isSubmitting || !spookyUsername.trim();
 
-  // ----------------- UI -----------------
   if (!ready) return <p>Loading Privy...</p>;
 
   return (
@@ -118,11 +118,8 @@ export default function WhitelistPage() {
         <p className={styles.list}>Whitelist</p>
 
         {!authenticated ? (
-          <button className={styles.buttonPurple} onClick={() => login({ 
-          method: "wallet"
-            
-          })}>
-            <Image src="/phantom.svg" alt="Wallet" width={30} height={30} priority />
+          <button className={styles.buttonPurple} onClick={login}>
+            <Image src="/Wallet.svg" alt="Wallet" width={30} height={30} priority />
             Connect Wallet
           </button>
         ) : whitelistSuccess ? (
@@ -163,9 +160,9 @@ export default function WhitelistPage() {
           <div>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image src="/phantom.svg" alt="Wallet" width={30} height={30} priority />
+                <Image src="/Wallet.svg" alt="Wallet" width={30} height={30} priority />
                 <span className={styles.walletAddress}>
-                  {formatWalletAddress(walletAddress)}
+                  {formatWalletAddress(walletAddress) || "No wallet connected"}
                 </span>
                 <span className={styles.statusDot}></span>
               </div>

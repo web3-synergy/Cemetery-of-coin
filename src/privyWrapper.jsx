@@ -2,43 +2,48 @@
 
 import { PrivyProvider } from "@privy-io/react-auth";
 
-// Detect mobile devices
-const isMobile = /iPhone|iPad|iPod|Android/i.test(
-  typeof navigator !== "undefined" ? navigator.userAgent : ""
-);
-
 export default function PrivyWrapper({ children }) {
   return (
     <PrivyProvider
-      appId={"cmgdbex2800uil70cw8diq9kx"} 
+      appId="cmgdbex2800uil70cw8diq9kx"
       config={{
-        loginMethods: ["wallet"],
+        loginMethods: ["wallet"], // you can also add 'email', 'google', etc.
         appearance: {
           theme: "dark",
           accentColor: "#6C63FF",
           showWalletLoginFirst: true,
         },
-
         walletConnect: {
           projectId: "7c4ac28d76f21a2b7ad46e6e82091fcf",
         },
 
+        // ✅ Correct structure for wallet connectors
         walletConnectors: {
           evm: {
-            chains: [56],
+            // Supported EVM chains (use chain objects, not just numbers)
+            chains: [
+              {
+                id: 56,
+                name: "Binance Smart Chain",
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
+              },
+            ],
             defaultChain: 56,
           },
-          solana: null, // disable Solana if not needed
+          solana: false, // explicitly disable Solana if not needed
         },
 
-        // Embedded wallet is optional on mobile
+        // ✅ Embedded wallets are supported (optional)
         embeddedWallets: {
-          createOnLogin: true, // don't force embedded wallet
+          createOnLogin: false, // set to true only if you want auto-wallet creation
         },
 
-        // Allow external wallets on all devices, including mobile
+        // ✅ Allow external wallets (MetaMask, Phantom, etc.)
         externalWallets: {
-          disableAllExternalWallets: false, // ✅ external wallets allowed
+          coinbaseWallet: {},
+          phantom: {},
+          walletConnect: {},
         },
       }}
     >
