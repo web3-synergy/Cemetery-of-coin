@@ -12,6 +12,8 @@ import { MdContentCopy } from "react-icons/md";
 import { Button, message } from 'antd';
 import { Paper} from "../icons/paper";
 import { Pixelify_Sans, Rubik_Pixels } from "next/font/google";
+import { Bnb } from '../icons/bnb';
+import { Four } from "../icons/Four";
 
 const aboutus  = [
     { label: 'Twitter', link: 'https://x.com/cemeteryofcoins' },
@@ -95,6 +97,14 @@ export default function Footer() {
                         {chart.map((item, i) => <Link key={i} href={item.link}>{item.label}</Link>)}
                     </motion.div>
                 </div>
+                <div className={styles.bnb}>
+  <h2 className={styles.chain}>
+    <Bnb width={50} height={50}    />
+    BNB CHAIN
+    
+  </h2>
+  <Four />
+</div>
 
               {/*  <div className=' col-sm-12 col-md-3 mt-3 mt-md-0 ps-4 ps-md-0'>
                     <motion.div

@@ -29,10 +29,29 @@
     font-family: "MyFont", sans-serif;
     position: absolute;
     top: 70px;
-    left: 100px;
+    left: 90px;
     font-size: 20px;
     color: white;
 }
+.bnb {
+    color: white;
+    display: flex;
+    flex-direction: row;       /* default: row for desktop */
+    justify-content: center;
+    align-items: center;       /* vertical alignment in row */
+    text-align: center;
+    margin-top: 30px;
+    gap: 20px;                 /* spacing between items */
+}
+
+/* Text styling */
+.chain {
+    font-size: 24px;
+    font-family: var(--font-redhat);
+    font-weight: 700;
+    margin: 0;                 /* remove fixed margins for better spacing control */
+}
+
 
 
 .btn{
@@ -138,7 +157,17 @@
     .mobileBreak{
         display: inline;
     }
-}
+    .bnb {
+        flex-direction: row; 
+                   
+    }
+
+    .chain {
+        font-size: 24px;        
+          
+    }
+}      
+
 
 @media screen and (max-width: 568px) {
     .CopyRight p {
@@ -155,4 +184,5 @@
     .address {
         font-size: 12px;
     }
+    
 }
