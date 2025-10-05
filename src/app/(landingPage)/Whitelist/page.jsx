@@ -2,15 +2,11 @@
 
 import React, { useState } from "react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
-import { useRouter } from "next/navigation"; // ✅ Router for redirect
+import { useRouter } from "next/navigation";
 import { db, addDoc, collection } from "@/firebase";
 import { query, where, getDocs, serverTimestamp } from "firebase/firestore";
 import Image from "next/image";
 import styles from "./Whitelist.module.css";
-
-
-
-
 
 export default function WhitelistPage() {
   const { ready, authenticated, login, logout } = usePrivy();
@@ -27,26 +23,23 @@ export default function WhitelistPage() {
   const formatWalletAddress = (addr) =>
     addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : "";
 
-  // ✅ Disconnect function
+  // ----------------- Wallet Functions -----------------
   const handleDisconnect = async () => {
     try {
-      await logout(); // end Privy session
-      if (wallets.length > 0) {
-        await disconnect(wallets[0]); // disconnect wallet (EVM)
-      }
+      await logout();
+      if (wallets.length > 0) await disconnect(wallets[0]);
 
-      // Reset UI state
       setWhitelistSuccess(false);
       setSpookyUsername("");
       setUsernameError("");
 
-      // Redirect to connect wallet screen
-      router.push("/"); // ✅ change this to "/" if you want home instead
+      router.push("/");
     } catch (err) {
       console.error("Error disconnecting:", err);
     }
   };
 
+  // ----------------- Form Validation -----------------
   const validateUsername = (username) => {
     const trimmed = username.trim();
     if (!trimmed) return "Please enter a username";
@@ -57,6 +50,7 @@ export default function WhitelistPage() {
     return "";
   };
 
+  // ----------------- Submit to Firestore -----------------
   const submitToWhitelist = async () => {
     const validationError = validateUsername(spookyUsername);
     if (validationError) {
@@ -112,7 +106,7 @@ export default function WhitelistPage() {
 
   const isButtonDisabled = isSubmitting || !spookyUsername.trim();
 
-  // ---------------- UI ----------------
+  // ----------------- UI -----------------
   if (!ready) return <p>Loading Privy...</p>;
 
   return (
@@ -125,14 +119,20 @@ export default function WhitelistPage() {
 
         {!authenticated ? (
           <button className={styles.buttonPurple} onClick={login}>
-            <Image src="phantom.svg" alt="Wallet" width={30} height={30} priority/>
+            <Image src="/phantom.svg" alt="Wallet" width={30} height={30} priority />
             Connect Wallet
           </button>
         ) : whitelistSuccess ? (
           <div className={styles.successScreen}>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image src="phantom.svg" alt="Wallet" width={30} height={30} priority/>
+                <Image
+                  src="/phantom.svg"
+                  alt="Wallet"
+                  width={30}
+                  height={30}
+                  className={styles.walletLogo}
+                />
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress)}
                 </span>
@@ -143,7 +143,7 @@ export default function WhitelistPage() {
               </button>
             </div>
 
-            <Image src="/Feedback.svg" alt="Success" width={10} height={10} priority />
+            <Image src="/Feedback.svg" alt="Success" width={100} height={200} priority />
             <p>You entered the waiting list successfully</p>
             <button
               className={`${styles.button} ${styles.buttonGreen}`}
@@ -160,7 +160,7 @@ export default function WhitelistPage() {
           <div>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-              <Image src="phantom.svg" alt="Wallet" width={30} height={30} priority/>
+                <Image src="/phantom.svg" alt="Wallet" width={30} height={30} priority />
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress)}
                 </span>
