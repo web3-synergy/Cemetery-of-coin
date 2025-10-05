@@ -9,18 +9,20 @@ export default function PrivyWrapper({ children }) {
       config={{
         loginMethods: ["wallet"],
         appearance: {
-          theme: "black",
+          theme: "dark",
           accentColor: "#6C63FF",
           showWalletLoginFirst: true,
         },
         embeddedWallets: {
           createOnLogin: "all-users",
         },
+        walletConnect: {
+          projectId: "7c4ac28d76f21a2b7ad46e6e82091fcf", // ✅ Move here
+        },
         walletConnectors: {
           evm: {
-            chains: [56], // BSC
+            chains: [56], // ✅ Binance Smart Chain
             defaultChain: 56,
-            walletConnectProjectId: "7c4ac28d76f21a2b7ad46e6e82091fcf", // 👈 Your WalletConnect project ID
           },
           solana: null,
         },
