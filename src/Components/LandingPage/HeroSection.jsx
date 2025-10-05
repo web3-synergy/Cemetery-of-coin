@@ -123,7 +123,9 @@ export default function HeroSection() {
 
   <span className={`${styles.menuItem} ${styles.disabled}`}>Dapp Soon</span>
 
-  <button className={styles.minbutton}>Join Whitelist</button>
+  <Link href="/Whitelist" className={styles.minbutton}>
+    Join Whitelist
+  </Link>
 </div>
 
           {/* Mobile Menu Button */}
@@ -143,7 +145,9 @@ export default function HeroSection() {
       {/* Top row: dApp Soon left, Join Whitelist right */}
       <div className={styles.mobileTopRow}>
         <span className={`${styles.menuItem} ${styles.disabled}`}>dApp Soon</span>
-        <button className={styles.minbutton}>Join Whitelist</button>
+        <Link href="/Whitelist" className={styles.minbutton}>
+    Join Whitelist
+  </Link>
       </div>
 
       {/* Links below */}
@@ -163,6 +167,8 @@ export default function HeroSection() {
       >
         <Tokenomics className={styles.menuicon} aria-label="Tokenomics" /> Tokenomics
       </Link>
+      
+    
       </div>
     </div>
   </>

@@ -1,0 +1,239 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #000000, #33026B);
+  }
+  .disconnectBtn {
+    background: none;
+    border: none;
+    color: #9151E4;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  
+  
+  .statusDot {
+    width: 10px;
+    height: 10px;
+    background: #4CAF50; /* green */
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;   /* allow stacking on small screens */
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  
+  .whitelistLogo {
+    max-width: 250px;
+    width: 100%;   /* responsive */
+    height: auto;  /* keep aspect ratio */
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: clamp(18px, 5vw, 28px); /* scales by screen size */
+    font-family: "MyFont", sans-serif;
+    color: white;
+    text-align: center;
+  }
+  
+  .card {
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: #00FF40 1px solid;
+  }
+  
+  /* Tablet */
+  @media (max-width: 768px) {
+    .card {
+      max-width: 95%;
+      padding: 1.5rem;
+    }
+  
+    .circle {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .whitelistLogo {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
+  }
+  
+  /* Phone */
+  @media (max-width: 480px) {
+    .card {
+      padding: 1rem;
+      max-width: 100%;
+    }
+  
+    .whitelistLogo {
+      max-width: 160px;
+    }
+  
+    .title {
+      font-size: 20px;
+    }
+  
+    .buttonPurple {
+      font-size: 13px;
+      height: auto;
+      padding: 0.5rem; /* shrink button on small screens */
+    }
+  
+    .buttonPurple .phantomLogo {
+      width: 24px;
+      height: 24px;
+      margin-right: 6px;
+      margin-bottom: 0;
+    }
+  }
+  
+  
+  .walletAddress {
+    
+    font-size: 0.9rem;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  
+  .errorText {
+    color: rgb(225, 13, 194);
+    font-size: 0.85em;
+    margin-top: 4px;
+  }
+  
+  .input {
+    width: 95%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: black;
+    border: 1px solid #33026B;
+    border-radius: 4px;
+    color: white;
+    font-size: 1rem;
+  }
+  /* 🔹 Ensure input looks the same on desktop & mobile */
+  .input:focus {
+    outline: none;               /* remove mobile browser glow */
+    border: 1px solid #33026B;   /* keep your custom purple border */
+    box-shadow: none;            /* remove iOS blue highlight */
+  }
+  
+  .input::placeholder {
+    color: white;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #33026B;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .buttonPurple {
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: #33026B 2px solid;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+  }
+  
+  .buttonPurple .phantomLogo {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    margin-bottom: 15px; /* fix bottom shift */
+  }
+  
+  .buttonGreen {
+    background-color: #00FF40;
+    color: black;
+  }
+  
+  .button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: black;
+    border: 2px solid #33026B;
+  }
+  
+  .list {
+    color: #9151E4;
+    margin-bottom: 1.5rem;
+  }
+  
+  .walletInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    background-color: black;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 0.75rem;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+  }
+  
+  @media (max-width: 480px) {
+    .walletInfo {
+      flex-direction: row;
+      height: auto;
+      padding: 0.5rem;
+      gap: 0.25rem;
+    }
+  }
+  
+  .walletAddress {
+    color: white;
+  }
+  
+  .connect {
+    color: #00FF40;
+  }
+  
+  .phantomLogo {
+    transform: translateY(5px);
+  }
+  
+  .walletAddressGroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.7rem;
+    gap: 0.25rem;
+  }
+  

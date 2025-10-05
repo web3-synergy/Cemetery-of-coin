@@ -1,5 +1,5 @@
 import { Red_Hat_Display, Lexend } from "next/font/google";
-
+import PrivyWrapper from "@/privyWrapper";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // import Navbar from "@/Components/layouts/Navbar";
@@ -26,7 +26,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${red_hat_display.variable} ${lexend.variable}`}>
-        <AntdRegistry>{children}</AntdRegistry>
+        <PrivyWrapper>
+         <AntdRegistry>{children}</AntdRegistry>
+        </PrivyWrapper>
       </body>
     </html>
   );

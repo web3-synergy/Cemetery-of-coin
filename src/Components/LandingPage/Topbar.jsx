@@ -24,7 +24,9 @@ export default function Topbar() {
         <span className={`${styles.menuItem} ${styles.disabled}`}>
           Dapp Soon
         </span>
-        <button className={styles.minbutton}>Join Whitelist</button>
+        <Link href="/Whitelist" className={styles.minbutton}>
+    Join Whitelist
+  </Link>
       </div>
 
       {/* Mobile Menu Button */}
@@ -57,7 +59,9 @@ export default function Topbar() {
               <span className={`${styles.menuItem} ${styles.disabled}`}>
                 dApp Soon
               </span>
-              <button className={styles.minbutton}>Join Whitelist</button>
+              <Link href="/Whitelist" className={styles.minbutton}>
+    Join Whitelist
+  </Link>
             </div>
 
             {/* Links row */}
@@ -77,6 +81,7 @@ export default function Topbar() {
               >
                 <Tokenomics className={styles.menuicon} /> Tokenomics
               </Link>
+              <Link href="/" className={styles.menuitem}>Home</Link>
             </div>
           </div>
         </>
