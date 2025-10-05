@@ -47,13 +47,7 @@ export default function Topbar() {
           ></div>
 
           <div className={styles.mobileMenu}>
-            {/* Close */}
-            <button
-              onClick={() => setMenuOpen(false)}
-              className={styles.closeButton}
-            >
-              ✕
-            </button>
+            
 
             {/* Top row */}
             <div className={styles.mobileTopRow}>
