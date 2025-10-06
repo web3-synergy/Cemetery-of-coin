@@ -20,11 +20,11 @@ const TokenomicsChart = () => {
         label: "Token Allocation",
         data: [20, 15, 30, 20, 15],
         backgroundColor: [
-          "rgba(57, 249, 69, 0.8)",   
-          "rgba(57, 200, 57, 0.6)",   
-          "rgba(34, 139, 34, 0.4)",   
-          "rgba(144, 238, 144, 0.5)", 
-          "rgba(0, 128, 0, 0.7)",
+          "green",   
+          "#2A1A3D",   
+          "#D2691E",   
+          "#F5F5F5", 
+          "#1C2526",
         ],
         borderWidth: 1,
       },
@@ -37,6 +37,7 @@ const TokenomicsChart = () => {
     plugins: {
       legend: {
         position: "bottom",
+        display: false,
         labels: {
           font: { size: 16 },
         },
@@ -51,6 +52,17 @@ const TokenomicsChart = () => {
         <h2 className={styles.title}>TOKENOMICS</h2>
         
         <Pie data={data} options={options} />
+        <div className={styles.legendGrid}>
+  {data.labels.map((label, index) => (
+    <div key={label} className={styles.legendItem}>
+      <span
+        className={styles.legendColor}
+        style={{ backgroundColor: data.datasets[0].backgroundColor[index] }}
+      ></span>
+      <span className={styles.legendLabel}>{label}</span>
+    </div>
+  ))}
+</div>
       </div>
     </div>
   );

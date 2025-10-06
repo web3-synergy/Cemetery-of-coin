@@ -98,11 +98,15 @@ export default function Footer() {
                     </motion.div>
                 </div>
                 <div className={styles.bnb}>
-                <h2 className={styles.chain}>
-  <Bnb width={50} height={50} />
-  <span>BNB CHAIN</span>
-</h2>
+                <img
+    src="https://yepe.fun/_assets/media/d5423491dd847dfa7d121903f1820380.png"
+    alt="Yepe Logo"
+    className={styles.image}
+    draggable={false}
+  />
+
   <Four />
+  
 </div>
 
               {/*  <div className=' col-sm-12 col-md-3 mt-3 mt-md-0 ps-4 ps-md-0'>

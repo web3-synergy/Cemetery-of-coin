@@ -169,9 +169,7 @@ export default function WhitelistPage() {
             <button
               className={`${styles.button} ${styles.buttonGreen}`}
               onClick={() => {
-                setWhitelistSuccess(false);
-                setSpookyUsername("");
-                setUsernameError("");
+                router.push("/believers");
               }}
             >
               Back to Whitelist

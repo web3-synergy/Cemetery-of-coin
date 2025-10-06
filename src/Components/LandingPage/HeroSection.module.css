@@ -173,22 +173,20 @@
   gap: 30px;
 }
 .topbar {
-       /* sticks to the top on scroll */
   top: 0;
   left: 0;
-  width: 1100px;              /* full width across screen */
+  width: 100%; /* ✅ full width */
+  max-width: 1200px; /* ✅ keeps it neat on large screens */
   height: 60px;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 255, 0, 0.18); /* translucent green bar */
-  
+  background: rgba(0, 255, 0, 0.18);
+  border-radius: 10px;
+  margin: 20px auto 30px; /* ✅ centered horizontally */
   z-index: 1000;
-  border-radius: 10px;  
-  margin-bottom: 30px;  
-  margin-left: 150px;
-  margin-top: 20px;        /* stays above other content */
+  box-sizing: border-box;
 }
 .heroicon {
   height: 46px;

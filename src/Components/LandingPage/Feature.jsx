@@ -20,7 +20,7 @@ const featureTabs = [
         id: 1,
         title: " Whitepaper",
         label: "Feature One",
-        desc: "Cemetery is a revolutionary DeFi utility project built on Binance Smart Chain (BSC), inspired by Solana's Sol Incinerator but tailored for BSC's vibrant ecosystem. We empower users to reclaim value from worthless dust meme coins",
+        desc: "Cemetery is a revolutionary DeFi utility project built on Binance Smart Chain (BSC). We empower users to reclaim value from worthless dust meme coins",
         icon: <Whitepaper  />,
         img: "/assets/img/landingPage/paper.PNG",
     },
@@ -130,7 +130,7 @@ export default function Feature() {
             {/* ✅ Section Title */}
           <div className={styles.sectionHeader}>
             <h2>OUR VISION</h2>
-            <p></p>
+            
           </div>
             <div className={styles.main}>
             <div className='px-2 px-sm-3 pt-4 pb-2 pb-sm-4'>

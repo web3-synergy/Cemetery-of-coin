@@ -45,6 +45,32 @@
     height: auto !important;
     max-height: 70vh; /* prevent chart from overflowing */
   }
+  .legendGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* two columns */
+    gap: 12px 30px; /* space between items (row, column) */
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .legendItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .legendColor {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+  
+  .legendLabel {
+    font-size: 16px;
+    color: white;
+  }
+  
+  
   
   /* Mobile adjustments */
   @media (max-width: 768px) {
@@ -52,6 +78,14 @@
       font-size: 1.8rem;
       margin-top: 1.5rem;
       margin-bottom: 1rem;
+    }
+    .legendGrid {
+      gap: 10px 20px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .legendLabel {
+      font-size: 14px;
     }
   }
   
