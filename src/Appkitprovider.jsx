@@ -16,8 +16,8 @@ const projectId = "7c4ac28d76f21a2b7ad46e6e82091fcf";
 // ✅ 3. App metadata (shown in wallet connection modal)
 const metadata = {
   name: "Cemetery of Coin",
-  description: "Whitelist dApp for EVM wallets",
-  url: "https://yourdomain.com",
+  description: "Whitelist",
+  url: "https://cemetery-of-coin.vercel.app/",
   icons: ["https://avatars.githubusercontent.com/u/179229932"],
 };
 
