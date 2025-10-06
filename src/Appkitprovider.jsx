@@ -2,6 +2,7 @@
 
 import React from "react";
 import { createAppKit } from "@reown/appkit/react";
+import { cookieStorage, createStorage, http } from "@wagmi/core";
 import { WagmiProvider } from "wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -36,6 +37,9 @@ const networks = [mainnet, arbitrum, bsc];
 
 // ✅ 6. Create Wagmi adapter
 export const wagmiAdapter = new WagmiAdapter({
+  storage: createStorage({
+    storage: cookieStorage
+  }),
   projectId,
   networks,
   ssr: true,
@@ -49,7 +53,9 @@ createAppKit({
   metadata,
   features: {
     analytics: true,
-    walletConnect: true, // ✅ important for mobile
+    email: false,
+    socials: false,
+    walletConnect: true, 
   },
 });
 

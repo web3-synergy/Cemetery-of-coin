@@ -129,10 +129,15 @@ export default function WhitelistPage() {
         <p className={styles.list}>Whitelist</p>
 
         {!isConnected ? (
-          <button onClick={handleConnect} className={styles.buttonPurple}>
-            <Image src="/Wallet.svg" alt="Wallet" width={18} height={18} priority />
-            Connect Wallet
-          </button>
+          <appkit-button
+          style={{
+            
+            color: "#fff",
+            borderRadius: "12px",
+            width: "200px",
+            height: "50px"
+          }}
+        ></appkit-button>
         ) : whitelistSuccess ? (
           <div className={styles.successScreen}>
             <div className={styles.walletInfo}>

@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${red_hat_display.variable} ${lexend.variable}`}>
-        <AppKitProvider>
+        <AppKitProvider >
          <AntdRegistry>{children}</AntdRegistry>
         </AppKitProvider>
       </body>
