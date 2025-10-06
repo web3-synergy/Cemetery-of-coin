@@ -97,17 +97,7 @@ export default function Footer() {
                         {chart.map((item, i) => <Link key={i} href={item.link}>{item.label}</Link>)}
                     </motion.div>
                 </div>
-                <div className={styles.bnb}>
-                <img
-    src="https://yepe.fun/_assets/media/d5423491dd847dfa7d121903f1820380.png"
-    alt="Yepe Logo"
-    className={styles.image}
-    draggable={false}
-  />
-
-  <Four />
-  
-</div>
+                
 
               {/*  <div className=' col-sm-12 col-md-3 mt-3 mt-md-0 ps-4 ps-md-0'>
                     <motion.div
@@ -177,29 +167,44 @@ function ContractAddress() {
 }
 function CopyRight() {
     return (
+      <>
         <motion.div
-            className={`${styles.CopyRight} d-flex justify-content-between align-items-center py-3 px-sm-2 `}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
-            viewport={{ once: true }}
+          className={`${styles.CopyRight} d-flex justify-content-between align-items-center py-3 px-sm-2 `}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+          viewport={{ once: true }}
         >
-            <p>
-  &copy; 2025 All rights Reserved
-  <span className={styles.mobileBreak}><br /></span>
-  Cemetery of Coins.
-</p>
-            <div className={`d-flex align-items-center justify-content-end  ${styles.icons}`}>
+          <p>
+            &copy; 2025 All rights Reserved
+            <span className={styles.mobileBreak}><br /></span>
+            Cemetery of Coins.
+          </p>
+          <div className={`d-flex align-items-center justify-content-end  ${styles.icons}`}>
             <a href="#" target="_blank" rel="noopener noreferrer">
-  <Image src={Dexscreener} alt="Dexscreener" width={24} height={24} className={styles.icon} />
-</a> 
-                <Link href='https://x.com/cemeteryofcoins' target="_blank" ><AkarIconsXFill className={styles.icon} /></Link>
-                <Link href="#" target="_blank"><BxBxlTelegram className={`${styles.icon}`} /></Link>
-                
-
-                <Link href="#" target="_blank"><Paper className={`${styles.icon} `} /></Link>
-                
-            </div>
+              <Image src={Dexscreener} alt="Dexscreener" width={24} height={24} className={styles.icon} />
+            </a>
+            <Link href='https://x.com/cemeteryofcoins' target="_blank">
+              <AkarIconsXFill className={styles.icon} />
+            </Link>
+            <Link href="#" target="_blank">
+              <BxBxlTelegram className={styles.icon} />
+            </Link>
+            <Link href="#" target="_blank">
+              <Paper className={styles.icon} />
+            </Link>
+          </div>
         </motion.div>
+  
+        <div className={styles.bnb}>
+          <img
+            src="https://yepe.fun/_assets/media/d5423491dd847dfa7d121903f1820380.png"
+            alt="Yepe Logo"
+            className={styles.image}
+            draggable={false}
+          />
+          <Four />
+        </div>
+      </>
     );
-}
+  }

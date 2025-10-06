@@ -36,18 +36,18 @@
 .bnb {
     color: white;
     display: flex;
-    flex-direction: row;       /* default: row for desktop */
+    flex-direction: column;       /* default: row for desktop */
     justify-content: center;
     align-items: center;       /* vertical alignment in row */
     text-align: center;
-    margin-top: 50px;
+    
     gap: 20px;                 /* spacing between items */
 }
 
 /* Text styling */
 .image{
     width: 300px;
-    height: 150px;
+    height: 120px;
     object-fit: contain;
     filter: brightness(0) saturate(100%) invert(76%) sepia(92%) saturate(700%) hue-rotate(1deg) brightness(102%) contrast(101%);
     margin-bottom: 10px;
@@ -159,7 +159,8 @@
         display: inline;
     }
     .bnb {
-        flex-direction: row; 
+        flex-direction: column; 
+        margin: 0;
                    
     }
 
