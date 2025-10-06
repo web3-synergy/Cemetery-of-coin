@@ -26,6 +26,7 @@ export default function WhitelistPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [whitelistSuccess, setWhitelistSuccess] = useState(false);
   const [usernameError, setUsernameError] = useState("");
+  const [showMobileWalletModal, setShowMobileWalletModal] = useState(false);
 
   const walletAddress = address || null;
 
@@ -42,25 +43,28 @@ export default function WhitelistPage() {
     return "";
   };
 
-  // ✅ Wallet connection handled entirely via AppKit
-  const handleConnect = async () => {
+  // Mobile wallet deep links
+  const mobileWalletLinks = {
+    metamask: "https://metamask.app.link/dapp/https://cemetery-of-coin.vercel.app/",
+    trust: "trust://browser_enable?url=https://cemetery-of-coin.vercel.app",
+    rainbow: "rainbow://app/https://cemetery-of-coin.vercel.app",
+  };
+
+  const handleConnect = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  
-    try {
-      if (isMobile) {
-        // ✅ Deep link for MetaMask mobile
-        window.location.href = "https://metamask.app.link/dapp/https://cemetery-of-coin.vercel.app/";
-  
-        // Optional: fallback QR code for other wallets
-        // You can implement a modal with WalletConnect QR code if needed
-      } else {
-        // Desktop: open AppKit modal
-        await open();
-      }
-    } catch (err) {
-      console.error("Wallet connect error:", err);
+
+    if (isMobile) {
+      setShowMobileWalletModal(true); // show wallet selection modal
+    } else {
+      open(); // desktop modal
     }
   };
+
+  const handleMobileWalletClick = (wallet) => {
+    const link = mobileWalletLinks[wallet];
+    if (link) window.location.href = link;
+  };
+
   const submitToWhitelist = async () => {
     const validationError = validateUsername(spookyUsername);
     if (validationError) {
@@ -200,6 +204,17 @@ export default function WhitelistPage() {
             >
               {isSubmitting ? "Submitting..." : "Join Whitelist"}
             </button>
+          </div>
+        )}
+
+        {/* Mobile wallet selection modal */}
+        {showMobileWalletModal && (
+          <div className={styles.mobileWalletModal}>
+            <p>Select a wallet</p>
+            <button onClick={() => handleMobileWalletClick("metamask")}>MetaMask</button>
+            <button onClick={() => handleMobileWalletClick("trust")}>Trust Wallet</button>
+            <button onClick={() => handleMobileWalletClick("rainbow")}>Rainbow</button>
+            <button onClick={() => setShowMobileWalletModal(false)}>Cancel</button>
           </div>
         )}
       </div>
