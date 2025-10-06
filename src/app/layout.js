@@ -1,5 +1,5 @@
 import { Red_Hat_Display, Lexend } from "next/font/google";
-import { AppKitProvider } from "@/AppKitProvider";
+import { AppKitProvider } from "@/Appkitprovider";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // import Navbar from "@/Components/layouts/Navbar";
