@@ -26,7 +26,6 @@ export default function WhitelistPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [whitelistSuccess, setWhitelistSuccess] = useState(false);
   const [usernameError, setUsernameError] = useState("");
-  const [showMobileWalletModal, setShowMobileWalletModal] = useState(false);
 
   const walletAddress = address || null;
 
@@ -43,26 +42,12 @@ export default function WhitelistPage() {
     return "";
   };
 
-  // Mobile wallet deep links
-  const mobileWalletLinks = {
-    metamask: "https://metamask.app.link/dapp/https://cemetery-of-coin.vercel.app/",
-    trust: "trust://browser_enable?url=https://cemetery-of-coin.vercel.app",
-    rainbow: "rainbow://app/https://cemetery-of-coin.vercel.app",
-  };
-
-  const handleConnect = () => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      setShowMobileWalletModal(true); // show wallet selection modal
-    } else {
-      open(); // desktop modal
+  const handleConnect = async () => {
+    try {
+      await open(); // AppKit modal for both desktop and mobile
+    } catch (err) {
+      console.error("AppKit connection error:", err);
     }
-  };
-
-  const handleMobileWalletClick = (wallet) => {
-    const link = mobileWalletLinks[wallet];
-    if (link) window.location.href = link;
   };
 
   const submitToWhitelist = async () => {
@@ -204,17 +189,6 @@ export default function WhitelistPage() {
             >
               {isSubmitting ? "Submitting..." : "Join Whitelist"}
             </button>
-          </div>
-        )}
-
-        {/* Mobile wallet selection modal */}
-        {showMobileWalletModal && (
-          <div className={styles.mobileWalletModal}>
-            <p>Select a wallet</p>
-            <button onClick={() => handleMobileWalletClick("metamask")}>MetaMask</button>
-            <button onClick={() => handleMobileWalletClick("trust")}>Trust Wallet</button>
-            <button onClick={() => handleMobileWalletClick("rainbow")}>Rainbow</button>
-            <button onClick={() => setShowMobileWalletModal(false)}>Cancel</button>
           </div>
         )}
       </div>

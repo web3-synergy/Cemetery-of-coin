@@ -12,8 +12,8 @@
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.1",
     "@privy-io/react-auth": "^3.0.1",
-    "@reown/appkit": "^1.8.8",
-    "@reown/appkit-adapter-wagmi": "^1.8.8",
+    "@reown/appkit": "^1.8.9",
+    "@reown/appkit-adapter-wagmi": "^1.8.9",
     "@tanstack/react-query": "^5.90.2",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
