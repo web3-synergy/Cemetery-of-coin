@@ -19,8 +19,8 @@ import styles from "./Whitelist.module.css";
 export default function WhitelistPage() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  const router = useRouter();
   const { open } = useAppKit();
+  const router = useRouter();
 
   const [spookyUsername, setSpookyUsername] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,11 +29,9 @@ export default function WhitelistPage() {
 
   const walletAddress = address || null;
 
-  // ✅ Remove TypeScript type annotation
   const formatWalletAddress = (addr) =>
     addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : "";
 
-  // ✅ Remove TypeScript type annotation
   const validateUsername = (username) => {
     const trimmed = username.trim();
     if (!trimmed) return "Please enter a username";
@@ -42,6 +40,15 @@ export default function WhitelistPage() {
     if (!/^[a-zA-Z0-9_]+$/.test(trimmed))
       return "Username can only contain letters, numbers, and underscores";
     return "";
+  };
+
+  // ✅ Wallet connection handled entirely via AppKit
+  const handleConnect = async () => {
+    try {
+      await open(); // AppKit handles mobile WalletConnect & desktop wallets
+    } catch (err) {
+      console.error("Wallet connect error:", err);
+    }
   };
 
   const submitToWhitelist = async () => {
@@ -59,7 +66,7 @@ export default function WhitelistPage() {
     setUsernameError("");
 
     try {
-      // ✅ Check if username exists
+      // Check username uniqueness
       const usernameQuery = query(
         collection(db, "whitelist_users"),
         where("spookyUsername", "==", spookyUsername.trim())
@@ -71,7 +78,7 @@ export default function WhitelistPage() {
         return;
       }
 
-      // ✅ Check if wallet is already whitelisted
+      // Check wallet uniqueness
       const walletQuery = query(
         collection(db, "whitelist_users"),
         where("walletAddress", "==", walletAddress)
@@ -83,7 +90,7 @@ export default function WhitelistPage() {
         return;
       }
 
-      // ✅ Add to Firestore
+      // Add to Firestore
       await addDoc(collection(db, "whitelist_users"), {
         walletAddress,
         spookyUsername: spookyUsername.trim(),
@@ -123,51 +130,24 @@ export default function WhitelistPage() {
         <p className={styles.list}>Whitelist</p>
 
         {!isConnected ? (
-  <button
-    onClick={() => open()}
-    className={styles.buttonPurple}
-  >
-    <Image
-      src="/Wallet.svg"
-      alt="Wallet"
-      width={18}
-      height={18}
-      priority
-    />
-    Connect Wallet
-  </button>
-
+          <button onClick={handleConnect} className={styles.buttonPurple}>
+            <Image src="/Wallet.svg" alt="Wallet" width={18} height={18} priority />
+            Connect Wallet
+          </button>
         ) : whitelistSuccess ? (
           <div className={styles.successScreen}>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image
-                  src="/Wallet.svg"
-                  alt="Wallet"
-                  width={20}
-                  height={20}
-                  className={styles.WalletLogo}
-                />
-                <span className={styles.walletAddress}>
-                  {formatWalletAddress(walletAddress)}
-                </span>
+                <Image src="/Wallet.svg" alt="Wallet" width={20} height={20} className={styles.WalletLogo} />
+                <span className={styles.walletAddress}>{formatWalletAddress(walletAddress)}</span>
                 <span className={styles.statusDot}></span>
               </div>
-              <button
-                onClick={handleDisconnect}
-                className={styles.disconnectBtn}
-              >
+              <button onClick={handleDisconnect} className={styles.disconnectBtn}>
                 Disconnect
               </button>
             </div>
 
-            <Image
-              src="/Feedback.svg"
-              alt="Success"
-              width={100}
-              height={200}
-              priority
-            />
+            <Image src="/Feedback.svg" alt="Success" width={100} height={200} priority />
             <p>You entered the waiting list successfully</p>
             <button
               className={`${styles.button} ${styles.buttonGreen}`}
@@ -180,22 +160,13 @@ export default function WhitelistPage() {
           <div>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image
-                  src="/Wallet.svg"
-                  alt="Wallet"
-                  width={20}
-                  height={20}
-                  priority
-                />
+                <Image src="/Wallet.svg" alt="Wallet" width={20} height={20} priority />
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress) || "No wallet connected"}
                 </span>
                 <span className={styles.statusDot}></span>
               </div>
-              <button
-                onClick={handleDisconnect}
-                className={styles.disconnectBtn}
-              >
+              <button onClick={handleDisconnect} className={styles.disconnectBtn}>
                 Disconnect
               </button>
             </div>
@@ -207,9 +178,7 @@ export default function WhitelistPage() {
                 placeholder="Spooky username"
                 className={styles.input}
               />
-              {usernameError && (
-                <p className={styles.errorText}>{usernameError}</p>
-              )}
+              {usernameError && <p className={styles.errorText}>{usernameError}</p>}
             </div>
 
             <button
