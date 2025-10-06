@@ -44,13 +44,23 @@ export default function WhitelistPage() {
 
   // ✅ Wallet connection handled entirely via AppKit
   const handleConnect = async () => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
     try {
-      await open(); // AppKit handles mobile WalletConnect & desktop wallets
+      if (isMobile) {
+        // ✅ Deep link for MetaMask mobile
+        window.location.href = "https://metamask.app.link/dapp/https://cemetery-of-coin.vercel.app/";
+  
+        // Optional: fallback QR code for other wallets
+        // You can implement a modal with WalletConnect QR code if needed
+      } else {
+        // Desktop: open AppKit modal
+        await open();
+      }
     } catch (err) {
       console.error("Wallet connect error:", err);
     }
   };
-
   const submitToWhitelist = async () => {
     const validationError = validateUsername(spookyUsername);
     if (validationError) {
