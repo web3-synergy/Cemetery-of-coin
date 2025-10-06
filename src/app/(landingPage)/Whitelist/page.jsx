@@ -1,63 +1,39 @@
 "use client";
 
 import React, { useState } from "react";
-import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { useAccount, useDisconnect } from "wagmi";
 import { useRouter } from "next/navigation";
 import { db } from "@/firebase";
-import { addDoc, collection, query, where, getDocs, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  serverTimestamp,
+} from "firebase/firestore";
+import { useAppKit } from "@reown/appkit/react";
 import Image from "next/image";
 import styles from "./Whitelist.module.css";
 
 export default function WhitelistPage() {
-  const { ready, authenticated, login, logout } = usePrivy();
-  const { wallets, disconnect } = useWallets();
+  const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
   const router = useRouter();
+  const { open } = useAppKit();
 
   const [spookyUsername, setSpookyUsername] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [whitelistSuccess, setWhitelistSuccess] = useState(false);
   const [usernameError, setUsernameError] = useState("");
 
-  // ✅ Supports both EVM and Solana addresses
-  const walletAddress = ready && wallets.length > 0 ? wallets[0].address : null;
-  const walletType = wallets[0]?.chainType || "unknown"; // 'evm' or 'solana'
+  const walletAddress = address || null;
 
+  // ✅ Remove TypeScript type annotation
   const formatWalletAddress = (addr) =>
     addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : "";
 
-  // ----------------- Wallet Disconnect -----------------
-  const handleDisconnect = async () => {
-    try {
-      console.log("Attempting to disconnect wallets:", wallets);
-  
-      // Explicitly disconnect all connected wallets
-      if (wallets && wallets.length > 0) {
-        for (const wallet of wallets) {
-          try {
-            await disconnect(wallet);
-            console.log(`Disconnected wallet: ${wallet.address}`);
-          } catch (err) {
-            console.warn(`Error disconnecting wallet ${wallet.address}:`, err);
-          }
-        }
-      }
-  
-      // Then log out Privy session
-      await logout();
-      console.log("Privy logout successful");
-  
-      // Reset state
-      setWhitelistSuccess(false);
-      setSpookyUsername("");
-      setUsernameError("");
-  
-      // Optional: Redirect user
-      
-    } catch (err) {
-      console.error("Error disconnecting wallets:", err);
-    }
-  };
-  // ----------------- Username Validation -----------------
+  // ✅ Remove TypeScript type annotation
   const validateUsername = (username) => {
     const trimmed = username.trim();
     if (!trimmed) return "Please enter a username";
@@ -68,7 +44,6 @@ export default function WhitelistPage() {
     return "";
   };
 
-  // ----------------- Firestore Submission -----------------
   const submitToWhitelist = async () => {
     const validationError = validateUsername(spookyUsername);
     if (validationError) {
@@ -84,6 +59,7 @@ export default function WhitelistPage() {
     setUsernameError("");
 
     try {
+      // ✅ Check if username exists
       const usernameQuery = query(
         collection(db, "whitelist_users"),
         where("spookyUsername", "==", spookyUsername.trim())
@@ -95,6 +71,7 @@ export default function WhitelistPage() {
         return;
       }
 
+      // ✅ Check if wallet is already whitelisted
       const walletQuery = query(
         collection(db, "whitelist_users"),
         where("walletAddress", "==", walletAddress)
@@ -106,10 +83,11 @@ export default function WhitelistPage() {
         return;
       }
 
+      // ✅ Add to Firestore
       await addDoc(collection(db, "whitelist_users"), {
         walletAddress,
-        chainType: walletType,
         spookyUsername: spookyUsername.trim(),
+        chainType: "evm",
         timestamp: serverTimestamp(),
       });
 
@@ -123,9 +101,18 @@ export default function WhitelistPage() {
     }
   };
 
-  const isButtonDisabled = isSubmitting || !spookyUsername.trim();
+  const handleDisconnect = async () => {
+    try {
+      disconnect();
+      setWhitelistSuccess(false);
+      setSpookyUsername("");
+      setUsernameError("");
+    } catch (err) {
+      console.error("Disconnect error:", err);
+    }
+  };
 
-  if (!ready) return <p>Loading Privy...</p>;
+  const isButtonDisabled = isSubmitting || !spookyUsername.trim();
 
   return (
     <div className={styles.container}>
@@ -135,14 +122,21 @@ export default function WhitelistPage() {
         </div>
         <p className={styles.list}>Whitelist</p>
 
-        {!authenticated ? (
-          <button
-          className={styles.buttonPurple}
-          onClick={() => login({ method: "wallet" })}
-        >
-          <Image src="/Wallet.svg" alt="Wallet" width={15} height={20} priority/>
-          Connect Wallet
-        </button>
+        {!isConnected ? (
+  <button
+    onClick={() => open()}
+    className={styles.buttonPurple}
+  >
+    <Image
+      src="/Wallet.svg"
+      alt="Wallet"
+      width={18}
+      height={18}
+      priority
+    />
+    Connect Wallet
+  </button>
+
         ) : whitelistSuccess ? (
           <div className={styles.successScreen}>
             <div className={styles.walletInfo}>
@@ -159,18 +153,25 @@ export default function WhitelistPage() {
                 </span>
                 <span className={styles.statusDot}></span>
               </div>
-              <button onClick={handleDisconnect} className={styles.disconnectBtn}>
+              <button
+                onClick={handleDisconnect}
+                className={styles.disconnectBtn}
+              >
                 Disconnect
               </button>
             </div>
 
-            <Image src="/Feedback.svg" alt="Success" width={100} height={200} priority />
+            <Image
+              src="/Feedback.svg"
+              alt="Success"
+              width={100}
+              height={200}
+              priority
+            />
             <p>You entered the waiting list successfully</p>
             <button
               className={`${styles.button} ${styles.buttonGreen}`}
-              onClick={() => {
-                router.push("/believers");
-              }}
+              onClick={() => router.push("/believers")}
             >
               Back to Whitelist
             </button>
@@ -179,13 +180,22 @@ export default function WhitelistPage() {
           <div>
             <div className={styles.walletInfo}>
               <div className={styles.walletAddressGroup}>
-                <Image src="/Wallet.svg" alt="Wallet" width={20} height={20} priority />
+                <Image
+                  src="/Wallet.svg"
+                  alt="Wallet"
+                  width={20}
+                  height={20}
+                  priority
+                />
                 <span className={styles.walletAddress}>
                   {formatWalletAddress(walletAddress) || "No wallet connected"}
                 </span>
                 <span className={styles.statusDot}></span>
               </div>
-              <button onClick={handleDisconnect} className={styles.disconnectBtn}>
+              <button
+                onClick={handleDisconnect}
+                className={styles.disconnectBtn}
+              >
                 Disconnect
               </button>
             </div>
@@ -197,7 +207,9 @@ export default function WhitelistPage() {
                 placeholder="Spooky username"
                 className={styles.input}
               />
-              {usernameError && <p className={styles.errorText}>{usernameError}</p>}
+              {usernameError && (
+                <p className={styles.errorText}>{usernameError}</p>
+              )}
             </div>
 
             <button
