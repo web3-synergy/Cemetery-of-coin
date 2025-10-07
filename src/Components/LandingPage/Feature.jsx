@@ -128,10 +128,10 @@ export default function Feature() {
             className={`container-lg  px-2 `}
         >
             {/* ✅ Section Title */}
-          <div className={styles.sectionHeader}>
-            <h2>OUR VISION</h2>
+          
+            <h2 className={styles.sectionHeader}>OUR VISION</h2>
             
-          </div>
+          
             <div className={styles.main}>
             <div className='px-2 px-sm-3 pt-4 pb-2 pb-sm-4'>
                 <div className='pb-4'>
